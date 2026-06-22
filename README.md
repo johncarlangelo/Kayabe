@@ -127,7 +127,7 @@ See `docs/structure.md` for detailed architecture documentation.
 
 ## Contributing
 
-1. Create feature branches from `main`
+1. Create feature branches from `dev`
 2. Write tests for new features
 3. Ensure `npm run lint` passes
 4. Submit pull requests with clear descriptions
