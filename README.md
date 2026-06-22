@@ -1,36 +1,133 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kayabé - Collaborative Task Management Platform
+
+A monorepo project containing a Next.js frontend, NestJS backend, and shared TypeScript types.
+
+## Project Structure
+
+This is a monorepo using npm workspaces with the following structure:
+
+```
+kayabe/
+├── apps/
+│   ├── web/          # Next.js frontend application
+│   └── api/          # NestJS backend + Socket.io server
+├── packages/
+│   └── shared/       # Shared TypeScript types and constants
+├── docs/             # Documentation (architecture, PRD, security, etc.)
+└── e2e/              # Playwright end-to-end tests
+```
+
+### apps/web (Next.js Frontend)
+
+**Location**: `apps/web/`
+
+- **Next.js 16.2.9** with App Router
+- **React 19.2.4** with TypeScript
+- **Tailwind CSS** for styling
+- **ESLint** for code quality
+
+Structure:
+- `src/app/` - App Router pages and layouts
+- `src/components/` - Reusable UI components
+- `src/features/` - Feature modules (auth, workspaces, projects, tasks, etc.)
+- `src/hooks/` - Custom React hooks
+- `src/services/` - API client and Socket.io wrapper
+- `src/utils/` - Formatters, validators, constants
+- `public/` - Static assets
+
+### apps/api (NestJS Backend)
+
+**Location**: `apps/api/`
+
+- **NestJS** - Node.js framework with TypeScript
+- **Socket.io** - Real-time communication
+- **Prisma** - Database ORM (planned)
+
+Structure:
+- `src/modules/` - Feature modules (auth, workspaces, projects, tasks, notifications)
+- `src/domain/` - Core business entities and rules
+- `src/application/` - Use cases and orchestration
+- `src/infrastructure/` - Repositories, Socket.io gateway, integrations
+- `src/config/` - Environment and feature flag configuration
+- `src/common/` - Guards, interceptors, decorators, RBAC
+
+### packages/shared
+
+**Location**: `packages/shared/`
+
+- Shared TypeScript types and interfaces
+- Constants and enums used across frontend and backend
+- Exports: `@kayabe/shared/types`, `@kayabe/shared/constants`
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- npm 9+ or pnpm
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Install dependencies for all workspaces
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Run the Next.js frontend (port 3000)
+npm run dev
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Run the NestJS backend (port 3001)
+npm run dev -w apps/api
 
-## Learn More
+# Run both simultaneously (requires separate terminals or process manager)
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Build all workspaces
+npm run build
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Build specific workspace
+npm run build -w apps/web
+npm run build -w apps/api
+```
 
-## Deploy on Vercel
+### Linting
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+# Lint all workspaces
+npm run lint
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Lint specific workspace
+npm run lint -w apps/web
+npm run lint -w apps/api
+```
+
+## Development Workflow
+
+1. **Frontend changes**: Edit files in `apps/web/src/`
+2. **Backend changes**: Edit files in `apps/api/src/`
+3. **Shared types**: Edit `packages/shared/src/types/` when adding new types
+4. **Update both apps** to use new shared types
+
+## Architecture Notes
+
+- **Monorepo Pattern**: Single repository with multiple applications sharing types
+- **Domain-Driven Design (Backend)**: Business logic separated in domain/application/infrastructure layers
+- **Feature Modules (Frontend)**: Organized by business domain
+- **Shared Types**: Backend and frontend use the same TypeScript types for DTOs and entities
+
+## Documentation
+
+See `docs/structure.md` for detailed architecture documentation.
+
+## Contributing
+
+1. Create feature branches from `main`
+2. Write tests for new features
+3. Ensure `npm run lint` passes
+4. Submit pull requests with clear descriptions

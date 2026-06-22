@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 10, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/nionc/Desktop/kayabe/apps/web/src/app/page.tsx"],"sourcesContent":["import Image from \"next/image\";\r\n\r\nexport default function Home() {\r\n  return (\r\n    <div className=\"flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black\">\r\n      <main className=\"flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start\">\r\n        <h1 className=\"text-3xl font-semibold\">Welcome to Kayabé</h1>\r\n        <p className=\"text-lg text-zinc-600 dark:text-zinc-400\">\r\n          Collaborative task management platform\r\n        </p>\r\n      </main>\r\n    </div>\r\n  );\r\n}\r\n"],"names":["Home","className"],"mappings":";;;;;;AAEe,SAASA;IACtB,qBACE,8OAAC;QAAIC,WAAU;kBACb,cAAA,8OAAC;YAAKA,WAAU;;8BACd,8OAAC;oBAAGA,WAAU;8BAAyB;;;;;;8BACvC,8OAAC;oBAAEA,WAAU;8BAA2C;;;;;;;;;;;;;;;;;AAMhE"}}]
+}
