@@ -12,7 +12,7 @@ kayabe/
 ├── packages/
 │   └── shared/       # Shared TypeScript types (DTOs, enums) used by both apps
 ├── docs/             # PRD, stack.md, security.md, etc.
-├── e2e/              # Playwright E2E tests
+├── e2e/              # Playwright E2E tests (will implement on Sprint X)
 ├── package.json      # Workspace root (npm workspaces)
 └── tsconfig.base.json
 ```
@@ -66,3 +66,4 @@ packages/shared/
 
 - Unit/integration tests: co-located `*.spec.ts` files
 - E2E tests: `e2e/` directory at root (Playwright)
+<!-- `npm init playwright@latest` -->

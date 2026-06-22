@@ -14,8 +14,8 @@ kayabe/
 ├── packages/
 │   └── shared/       # Shared TypeScript types and constants
 ├── docs/             # Documentation (architecture, PRD, security, etc.)
-└── e2e/              # Playwright end-to-end tests
 ```
+<!-- └── e2e/              # Playwright end-to-end tests, will add on Sprint X -->
 
 ### apps/web (Next.js Frontend)
 
