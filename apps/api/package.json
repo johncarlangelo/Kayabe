@@ -28,6 +28,8 @@
     "@nestjs/cli": "^10.3.0",
     "@nestjs/schematics": "^10.0.2",
     "@types/node": "^20.0.0",
-    "typescript": "^5.0.0"
+    "eslint": "^9",
+    "typescript": "^5.0.0",
+    "typescript-eslint": "^8"
   }
 }
