@@ -31,7 +31,10 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env
+.env*
+
+# prevents git from ignoring .env.example
+!.env.example
 
 # vercel
 .vercel
