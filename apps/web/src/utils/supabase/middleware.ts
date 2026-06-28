@@ -4,7 +4,7 @@ import { type NextRequest, NextResponse } from "next/server";
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
-export const createClient = (request: NextRequest) => {
+export const createClient = async (request: NextRequest) => {
   // Create an unmodified response
   let supabaseResponse = NextResponse.next({
     request: {
@@ -12,7 +12,7 @@ export const createClient = (request: NextRequest) => {
     },
   });
 
-  createServerClient(
+  const supabase = createServerClient(
     supabaseUrl!,
     supabaseKey!,
     {
@@ -32,6 +32,8 @@ export const createClient = (request: NextRequest) => {
       },
     },
   );
+
+  await supabase.auth.getUser()
 
   return supabaseResponse
 };
