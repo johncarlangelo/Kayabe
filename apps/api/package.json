@@ -19,6 +19,7 @@
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/platform-socket.io": "^10.0.0",
     "@nestjs/websockets": "^10.0.0",
+    "@prisma/client": "^7.8.0",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.0",
     "reflect-metadata": "^0.1.13",
@@ -29,6 +30,7 @@
     "@nestjs/schematics": "^10.0.2",
     "@types/node": "^20.0.0",
     "eslint": "^9",
+    "prisma": "^7.8.0",
     "typescript": "^5.0.0",
     "typescript-eslint": "^8"
   }
