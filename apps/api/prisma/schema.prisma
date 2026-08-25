@@ -1,8 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -10,4 +8,101 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+}
+
+enum RoleName {
+  owner
+  admin
+  member
+}
+
+enum InvitationStatus {
+  pending
+  accepted
+  rejected
+  expired
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique @db.VarChar(255)
+  name      String?  @db.VarChar(255)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  ownedWorkspaces  Workspace[]       @relation("WorkspaceOwner")
+  workspaceMembers WorkspaceMember[]
+
+  @@map("users")
+}
+
+model Workspace {
+  id          String   @id @default(uuid())
+  name        String   @db.VarChar(255)
+  ownerId     String   @map("owner_id")
+  description String?  @db.Text
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  owner       User              @relation("WorkspaceOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  members     WorkspaceMember[]
+  roles       Role[]
+  invitations Invitation[]
+
+  @@index([ownerId])
+  @@index([createdAt])
+  @@map("workspaces")
+}
+
+model Role {
+  id          String    @id @default(uuid())
+  name        RoleName
+  permissions Json      @default("[]")
+  workspaceId String?   @map("workspace_id")
+  createdAt   DateTime  @default(now()) @map("created_at")
+
+  workspace   Workspace?        @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  members     WorkspaceMember[]
+  invitations Invitation[]
+
+  @@index([workspaceId])
+  @@map("roles")
+}
+
+model WorkspaceMember {
+  id          String   @id @default(uuid())
+  workspaceId String   @map("workspace_id")
+  userId      String   @map("user_id")
+  roleId      String   @map("role_id")
+  joinedAt    DateTime @default(now()) @map("joined_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      Role      @relation(fields: [roleId], references: [id], onDelete: Restrict)
+
+  @@unique([workspaceId, userId])
+  @@index([workspaceId])
+  @@index([userId])
+  @@index([roleId])
+  @@map("workspace_members")
+}
+
+model Invitation {
+  id          String           @id @default(uuid())
+  workspaceId String           @map("workspace_id")
+  email       String           @db.VarChar(255)
+  roleId      String           @map("role_id")
+  status      InvitationStatus @default(pending)
+  createdAt   DateTime         @default(now()) @map("created_at")
+  expiresAt   DateTime         @map("expires_at")
+  acceptedAt  DateTime?        @map("accepted_at")
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  role      Role      @relation(fields: [roleId], references: [id], onDelete: Restrict)
+
+  @@index([workspaceId])
+  @@index([email])
+  @@index([status])
+  @@map("invitations")
 }

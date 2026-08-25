@@ -12,6 +12,7 @@ export interface User {
   email: string;
   name: string;
   role: UserRole;
+  avatarUrl?: string;
 }
 
 export interface Workspace {
@@ -29,12 +30,24 @@ export interface Project {
 
 export interface Task {
   id: string;
-  projectId: string;
+  projectId?: string;
+  parentId?: string | null;
   title: string;
   description?: string;
-  status: TaskStatus;
-  priority: TaskPriority;
-  assignedTo?: string;
+  status: TaskStatus | string;
+  priority?: TaskPriority | null;
+  assignedTo?: string | null;
+  assignee?: {
+    id: string;
+    name: string;
+    email: string;
+    avatarUrl?: string;
+  } | null;
+  dueDate?: string | null;
+  subtasks?: Task[];
+  order?: number;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export enum TaskStatus {
@@ -50,3 +63,4 @@ export enum TaskPriority {
   HIGH = "HIGH",
   URGENT = "URGENT",
 }
+
