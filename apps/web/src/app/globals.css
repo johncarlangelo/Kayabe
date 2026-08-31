@@ -1,11 +1,103 @@
 @import "tailwindcss";
 
 :root {
-  --background: #090d16;
-  --foreground: #f3f4f6;
-  --brand-purple: #6c63ff;
-  --brand-purple-hover: #5b52f5;
-  --brand-indigo: #4b48d6;
+  /* Surfaces — Cool Slate Matrix (Dark Default) */
+  --bg-app: #0b0e18;
+  --bg-canvas: #0b0e18;
+  --bg-panel: #101524;
+  --bg-surface: #131828;
+  --bg-card: #131828;
+  --bg-menu: #0e1220;
+  --bg-input: #080b13;
+  --bg-inset: #080b13;
+  --bg-hover: #192034;
+  --bg-active-nav: #151d32;
+
+  /* Specular Highlights & Borders */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-highlight: rgba(255, 255, 255, 0.16);
+  --border-input: rgba(255, 255, 255, 0.07);
+  --border-focus: #00d2ee;
+
+  /* Typography & Ink */
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-on-accent: #ffffff;
+
+  /* Singular Accent — Electric Cyan & Deep Cobalt */
+  --accent-primary: #00d2ee;
+  --accent-secondary: #0066ff;
+  --accent-cta: #0066ff;
+  --accent-hover: #0052cc;
+  --accent-subtle: rgba(0, 210, 238, 0.12);
+  --accent-link: #00d2ee;
+  --accent-headline: #38bdf8;
+
+  /* Secondary button */
+  --btn-secondary-bg: #131828;
+  --btn-secondary-text: #e2e8f0;
+
+  /* Status Colors */
+  --status-success: #10b981;
+  --status-warning: #f59e0b;
+  --status-error: #ef4444;
+  --status-info: #00d2ee;
+
+  /* Brand */
+  --brand-logo-bg: #131828;
+  --brand-logo-icon: #00d2ee;
+  --brand-btn: #0066ff;
+  --brand-btn-text: #ffffff;
+
+  /* Directional Lighting Vectors (45° Top-Left Key Light) */
+  --shadow-light-col: rgba(255, 255, 255, 0.06);
+  --shadow-dark-col: rgba(0, 0, 0, 0.65);
+  --shadow-dark-deep: rgba(0, 0, 0, 0.85);
+
+  /* Neumorphic Shadow Tokens */
+  --nm-raised: -6px -6px 16px var(--shadow-light-col), 6px 6px 18px var(--shadow-dark-col);
+  --nm-raised-sm: -4px -4px 10px var(--shadow-light-col), 4px 4px 12px var(--shadow-dark-col);
+  --nm-raised-xs: -2px -2px 6px var(--shadow-light-col), 2px 2px 6px var(--shadow-dark-col);
+  --nm-flat-hover: -8px -8px 20px var(--shadow-light-col), 8px 8px 24px var(--shadow-dark-col);
+  --nm-inset: inset 4px 4px 8px var(--shadow-dark-deep), inset -3px -3px 7px var(--shadow-light-col);
+  --nm-inset-sm: inset 2px 2px 5px var(--shadow-dark-deep), inset -2px -2px 5px var(--shadow-light-col);
+  --nm-inset-xs: inset 1px 1px 3px var(--shadow-dark-deep), inset -1px -1px 3px var(--shadow-light-col);
+  --nm-accent-raised: -4px -4px 12px rgba(0, 210, 238, 0.15), 4px 4px 16px rgba(0, 0, 0, 0.7);
+  --nm-glow: 0 0 16px rgba(0, 210, 238, 0.4), -3px -3px 8px var(--shadow-light-col), 3px 3px 10px var(--shadow-dark-col);
+
+  --background: var(--bg-app);
+  --foreground: var(--text-primary);
+}
+
+.light {
+  --bg-app: #ebf1f5;
+  --bg-canvas: #ebf1f5;
+  --bg-panel: #f1f6fa;
+  --bg-surface: #f4f8fa;
+  --bg-card: #f4f8fa;
+  --bg-menu: #e8f0f5;
+  --bg-input: #e2e8f0;
+  --bg-inset: #e2e8f0;
+  --bg-hover: #e2ecf2;
+  --bg-active-nav: #d8e5ee;
+
+  --border-subtle: rgba(200, 214, 229, 0.6);
+  --border-highlight: rgba(255, 255, 255, 0.85);
+  --border-input: rgba(180, 198, 216, 0.6);
+  --border-focus: #0066ff;
+
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --text-on-accent: #ffffff;
+
+  --shadow-light-col: #ffffff;
+  --shadow-dark-col: rgba(166, 180, 200, 0.60);
+  --shadow-dark-deep: rgba(140, 155, 178, 0.75);
+
+  --background: var(--bg-app);
+  --foreground: var(--text-primary);
 }
 
 @theme inline {
@@ -16,10 +108,97 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--bg-canvas);
+  color: var(--text-primary);
   font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   overflow-x: hidden;
+  min-height: 100dvh;
+}
+
+/* Reusable Neumorphic Utilities */
+.nm-raised {
+  background: var(--bg-surface);
+  box-shadow: var(--nm-raised);
+  border-top: 1px solid var(--border-highlight);
+  border-left: 1px solid var(--border-highlight);
+}
+
+.nm-raised-sm {
+  background: var(--bg-surface);
+  box-shadow: var(--nm-raised-sm);
+  border-top: 1px solid var(--border-highlight);
+  border-left: 1px solid var(--border-highlight);
+}
+
+.nm-raised-xs {
+  background: var(--bg-surface);
+  box-shadow: var(--nm-raised-xs);
+}
+
+.nm-inset {
+  background: var(--bg-inset);
+  box-shadow: var(--nm-inset);
+  border: 1px solid var(--border-input);
+}
+
+.nm-inset-sm {
+  background: var(--bg-inset);
+  box-shadow: var(--nm-inset-sm);
+}
+
+.nm-input {
+  background: var(--bg-surface);
+  box-shadow: var(--nm-raised-xs);
+  border-top: 1px solid var(--border-highlight);
+  border-left: 1px solid var(--border-highlight);
+  border-right: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nm-input:hover {
+  box-shadow: var(--nm-raised-sm);
+}
+
+.nm-input:focus, .nm-input:focus-within {
+  box-shadow: var(--nm-raised-sm), 0 0 0 1px var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+.nm-btn {
+  background: var(--bg-surface);
+  box-shadow: var(--nm-raised-sm);
+  border-top: 1px solid var(--border-highlight);
+  border-left: 1px solid var(--border-highlight);
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nm-btn:hover {
+  box-shadow: var(--nm-flat-hover);
+}
+
+.nm-btn:active {
+  box-shadow: var(--nm-inset-sm);
+  transform: translateY(1px) scale(0.99);
+}
+
+.nm-btn-primary {
+  background: linear-gradient(135deg, #0066ff 0%, #0052cc 100%);
+  color: #ffffff;
+  box-shadow: -3px -3px 10px rgba(0, 210, 238, 0.2), 3px 3px 14px rgba(0, 0, 0, 0.6);
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nm-btn-primary:hover {
+  background: linear-gradient(135deg, #0072ff 0%, #005ae0 100%);
+  box-shadow: -4px -4px 14px rgba(0, 210, 238, 0.3), 4px 4px 18px rgba(0, 0, 0, 0.7);
+}
+
+.nm-btn-primary:active {
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.6), inset -2px -2px 5px rgba(0, 210, 238, 0.3);
+  transform: translateY(1px) scale(0.99);
 }
 
 /* Custom scrollbar */
@@ -28,12 +207,12 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--bg-inset);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--shadow-light-col);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--text-muted);
 }

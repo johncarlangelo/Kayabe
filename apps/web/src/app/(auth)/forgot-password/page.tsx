@@ -45,21 +45,23 @@ export default function ForgotPasswordPage() {
 
   return (
     <AuthLayout>
-      <div className="w-full bg-[#101423]/95 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-10 shadow-2xl shadow-indigo-950/50">
+      <div className="w-full nm-raised border border-[var(--border-subtle)] rounded-3xl p-8 sm:p-10 text-left transition-colors duration-200">
         {success ? (
           <div className="space-y-6 text-center py-4">
-            <div className="w-16 h-16 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mx-auto text-emerald-400">
+            <div className="w-16 h-16 rounded-2xl nm-inset flex items-center justify-center mx-auto text-emerald-400">
               <CheckCircle2 className="w-8 h-8" />
             </div>
             <div className="space-y-2">
-              <h2 className="text-2xl font-bold text-white">Reset link sent</h2>
-              <p className="text-sm text-slate-400 max-w-xs mx-auto">
-                We sent a password reset link to <strong className="text-white">{email}</strong>. Check your inbox to set a new password.
+              <h2 className="text-2xl font-bold text-[var(--text-primary)] tracking-tight">
+                Reset link sent
+              </h2>
+              <p className="text-sm text-[var(--text-secondary)] max-w-xs mx-auto">
+                We sent a password reset link to <strong className="text-[var(--text-primary)]">{email}</strong>. Check your inbox to set a new password.
               </p>
             </div>
             <Link
               href="/login"
-              className="inline-flex items-center justify-center gap-2 w-full bg-[#6c63ff] hover:bg-[#5b52f5] text-white font-semibold py-3 px-4 rounded-xl transition-all shadow-lg shadow-indigo-600/30 text-sm"
+              className="inline-flex items-center justify-center gap-2 w-full nm-btn text-[var(--text-primary)] font-semibold py-3 px-4 rounded-xl transition-all text-sm"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Back to Sign in</span>
@@ -68,18 +70,18 @@ export default function ForgotPasswordPage() {
         ) : (
           <>
             {/* Card Header */}
-            <div className="space-y-1.5 text-left mb-6">
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+            <div className="space-y-1.5 mb-6">
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--text-primary)]">
                 Reset password
               </h2>
-              <p className="text-slate-400 text-sm sm:text-base">
-                Enter your email to receive a password reset link
+              <p className="text-[var(--text-secondary)] text-sm">
+                Enter your verified email to receive a secure recovery token
               </p>
             </div>
 
             {/* Error Alert */}
             {errorMessage && (
-              <div className="mb-5 p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/25 flex items-start gap-3 text-rose-300 text-sm">
+              <div className="mb-5 p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/25 flex items-start gap-3 text-rose-400 text-sm">
                 <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
                 <span>{errorMessage}</span>
               </div>
@@ -88,18 +90,18 @@ export default function ForgotPasswordPage() {
             {/* Form */}
             <form onSubmit={handleReset} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5 tracking-wide">
-                  Email
+                <label className="block text-xs font-semibold text-[var(--text-secondary)] mb-1.5 tracking-wide">
+                  Account Email
                 </label>
                 <div className="relative">
-                  <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <Mail className="w-4 h-4 text-[var(--text-muted)] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                   <input
                     type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="you@company.com"
-                    className="w-full bg-[#161b2e] border border-white/10 rounded-xl py-2.5 pl-10 pr-4 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#6c63ff] focus:border-transparent transition-all shadow-inner"
+                    placeholder="name@company.com"
+                    className="w-full nm-input rounded-xl py-2.5 pl-10 pr-4 text-[var(--text-primary)] placeholder-[var(--text-muted)] text-sm focus:outline-none transition-all font-sans"
                   />
                 </div>
               </div>
@@ -108,7 +110,7 @@ export default function ForgotPasswordPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full mt-2 bg-[#6c63ff] hover:bg-[#5b52f5] active:scale-[0.99] disabled:opacity-60 text-white font-semibold py-3 px-4 rounded-xl transition-all shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2 text-sm cursor-pointer"
+                className="w-full mt-2 nm-btn-primary disabled:opacity-60 text-white font-semibold py-3 px-4 rounded-xl flex items-center justify-center gap-2 text-sm cursor-pointer"
               >
                 {loading ? (
                   <>
@@ -128,10 +130,10 @@ export default function ForgotPasswordPage() {
             <div className="text-center mt-6">
               <Link
                 href="/login"
-                className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs font-mono text-[var(--accent-link)] hover:opacity-80 transition-opacity"
               >
-                <ArrowLeft className="w-4 h-4" />
-                <span>Back to Sign in</span>
+                <ArrowLeft className="w-3.5 h-3.5" />
+                <span>Back to sign in</span>
               </Link>
             </div>
           </>
