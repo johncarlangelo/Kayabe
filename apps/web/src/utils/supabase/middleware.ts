@@ -39,33 +39,16 @@ export const updateSession = async (request: NextRequest) => {
 
   const pathname = request.nextUrl.pathname;
 
-  // Protected route patterns
-  const isProtectedRoute =
-    pathname.startsWith("/dashboard") ||
-    pathname.startsWith("/projects") ||
-    pathname.startsWith("/tasks") ||
-    pathname.startsWith("/board") ||
-    pathname.startsWith("/workspaces") ||
-    pathname.startsWith("/settings");
-
   // Auth pages (login, signup, etc.)
   const isAuthRoute =
     pathname === "/login" ||
     pathname === "/signup" ||
     pathname === "/forgot-password";
 
-  // If user is not logged in and accessing protected route -> redirect to /login
-  if (!user && isProtectedRoute) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/login";
-    url.searchParams.set("next", pathname);
-    return NextResponse.redirect(url);
-  }
-
-  // If user is already logged in and accessing auth route -> redirect to /dashboard
+  // If user is already logged in and accessing auth route -> redirect to /
   if (user && isAuthRoute) {
     const url = request.nextUrl.clone();
-    url.pathname = "/dashboard";
+    url.pathname = "/";
     url.searchParams.delete("next");
     return NextResponse.redirect(url);
   }

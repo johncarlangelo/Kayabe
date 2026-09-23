@@ -10,7 +10,7 @@ import { Mail, Lock, Eye, EyeOff, ArrowRight, Loader2, AlertCircle } from "lucid
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const next = searchParams.get("next") ?? "/dashboard";
+  const next = searchParams.get("next") ?? "/";
   const errorParam = searchParams.get("error");
 
   const [email, setEmail] = useState("");
@@ -79,20 +79,20 @@ function LoginForm() {
   };
 
   return (
-    <div className="w-full bg-[#101423]/95 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-10 shadow-2xl shadow-indigo-950/50">
+    <div className="w-full nm-raised border border-[var(--border-subtle)] rounded-3xl p-8 sm:p-10 text-left transition-colors duration-200">
       {/* Card Header */}
-      <div className="space-y-1.5 text-left mb-7">
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
-          Welcome back
+      <div className="space-y-1.5 mb-7">
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--text-primary)]">
+          Sign in
         </h2>
-        <p className="text-slate-400 text-sm sm:text-base">
-          Sign in to your Kayabé workspace
+        <p className="text-[var(--text-secondary)] text-sm">
+          Access your Kayabé workspace and project boards
         </p>
       </div>
 
       {/* Error Alert */}
       {errorMessage && (
-        <div className="mb-6 p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/25 flex items-start gap-3 text-rose-300 text-sm">
+        <div className="mb-6 p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/25 flex items-start gap-3 text-rose-400 text-sm">
           <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
           <span>{errorMessage}</span>
         </div>
@@ -104,10 +104,10 @@ function LoginForm() {
           type="button"
           onClick={() => handleOAuthLogin("google")}
           disabled={loading || !!oauthLoading}
-          className="w-full bg-[#171b2d] hover:bg-[#20253e] disabled:opacity-60 active:scale-[0.99] border border-white/10 text-white font-medium py-2.5 px-4 rounded-xl flex items-center justify-center gap-2.5 transition-all text-sm shadow-sm cursor-pointer"
+          className="w-full nm-btn disabled:opacity-60 text-[var(--text-primary)] font-medium py-2.5 px-4 rounded-xl flex items-center justify-center gap-2.5 text-sm cursor-pointer"
         >
           {oauthLoading === "google" ? (
-            <Loader2 className="w-4 h-4 animate-spin text-white" />
+            <Loader2 className="w-4 h-4 animate-spin text-[var(--text-primary)]" />
           ) : (
             <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
               <path
@@ -135,12 +135,12 @@ function LoginForm() {
           type="button"
           onClick={() => handleOAuthLogin("github")}
           disabled={loading || !!oauthLoading}
-          className="w-full bg-[#171b2d] hover:bg-[#20253e] disabled:opacity-60 active:scale-[0.99] border border-white/10 text-white font-medium py-2.5 px-4 rounded-xl flex items-center justify-center gap-2.5 transition-all text-sm shadow-sm cursor-pointer"
+          className="w-full nm-btn disabled:opacity-60 text-[var(--text-primary)] font-medium py-2.5 px-4 rounded-xl flex items-center justify-center gap-2.5 text-sm cursor-pointer"
         >
           {oauthLoading === "github" ? (
-            <Loader2 className="w-4 h-4 animate-spin text-white" />
+            <Loader2 className="w-4 h-4 animate-spin text-[var(--text-primary)]" />
           ) : (
-            <svg className="w-4 h-4 fill-white shrink-0" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24">
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -154,51 +154,51 @@ function LoginForm() {
 
       {/* Divider */}
       <div className="relative flex items-center justify-center mb-6">
-        <div className="w-full border-t border-white/10" />
-        <span className="absolute bg-[#101423] px-3 text-[11px] font-medium text-slate-400 tracking-wider">
-          or continue with email
+        <div className="w-full border-t border-[var(--border-subtle)]" />
+        <span className="absolute bg-[var(--bg-card)] px-3 text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider">
+          or email dispatch
         </span>
       </div>
 
       {/* Email/Password Form */}
       <form onSubmit={handleEmailLogin} className="space-y-4">
         <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1.5 tracking-wide">
-            Email
+          <label className="block text-xs font-semibold text-[var(--text-secondary)] mb-1.5 tracking-wide">
+            Work Email
           </label>
           <div className="relative">
-            <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <Mail className="w-4 h-4 text-[var(--text-muted)] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@company.com"
-              className="w-full bg-[#161b2e] border border-white/10 rounded-xl py-2.5 pl-10 pr-4 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#6c63ff] focus:border-transparent transition-all shadow-inner"
+              placeholder="name@company.com"
+              className="w-full nm-input rounded-xl py-2.5 pl-10 pr-4 text-[var(--text-primary)] placeholder-[var(--text-muted)] text-sm focus:outline-none transition-all font-sans"
             />
           </div>
         </div>
 
         <div>
           <div className="flex items-center justify-between mb-1.5">
-            <label className="block text-xs font-semibold text-slate-300 tracking-wide">
+            <label className="block text-xs font-semibold text-[var(--text-secondary)] tracking-wide">
               Password
             </label>
           </div>
           <div className="relative">
-            <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <Lock className="w-4 h-4 text-[var(--text-muted)] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type={showPassword ? "text" : "password"}
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Your password"
-              className="w-full bg-[#161b2e] border border-white/10 rounded-xl py-2.5 pl-10 pr-10 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#6c63ff] focus:border-transparent transition-all shadow-inner"
+              className="w-full nm-input rounded-xl py-2.5 pl-10 pr-10 text-[var(--text-primary)] placeholder-[var(--text-muted)] text-sm focus:outline-none transition-all font-sans"
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white transition-colors focus:outline-none"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors focus:outline-none cursor-pointer"
             >
               {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
@@ -208,7 +208,7 @@ function LoginForm() {
         <div className="flex justify-end pt-1">
           <Link
             href="/forgot-password"
-            className="text-xs text-slate-400 hover:text-white transition-colors font-medium"
+            className="text-xs text-[var(--accent-link)] hover:opacity-80 transition-opacity font-mono"
           >
             Forgot password?
           </Link>
@@ -218,12 +218,12 @@ function LoginForm() {
         <button
           type="submit"
           disabled={loading || !!oauthLoading}
-          className="w-full mt-2 bg-[#6c63ff] hover:bg-[#5b52f5] active:scale-[0.99] disabled:opacity-60 text-white font-semibold py-3 px-4 rounded-xl transition-all shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2 text-sm cursor-pointer"
+          className="w-full mt-2 nm-btn-primary disabled:opacity-60 text-white font-semibold py-3 px-4 rounded-xl flex items-center justify-center gap-2 text-sm cursor-pointer"
         >
           {loading ? (
             <>
               <Loader2 className="w-4 h-4 animate-spin text-white" />
-              <span>Signing in...</span>
+              <span>Authenticating...</span>
             </>
           ) : (
             <>
@@ -235,13 +235,13 @@ function LoginForm() {
       </form>
 
       {/* Footer */}
-      <p className="text-center text-sm text-slate-400 mt-6">
-        No account?{" "}
+      <p className="text-center text-xs text-[var(--text-secondary)] mt-6 font-mono">
+        Need an account?{" "}
         <Link
           href="/signup"
-          className="text-white hover:text-indigo-300 font-semibold transition-colors"
+          className="text-[var(--accent-link)] hover:opacity-80 font-semibold transition-opacity"
         >
-          Create one
+          Register workspace
         </Link>
       </p>
     </div>
@@ -253,8 +253,8 @@ export default function LoginPage() {
     <AuthLayout>
       <Suspense
         fallback={
-          <div className="w-full bg-[#101423]/95 backdrop-blur-xl border border-white/10 rounded-3xl p-12 text-center text-slate-400 flex items-center justify-center">
-            <Loader2 className="w-6 h-6 animate-spin text-indigo-400" />
+          <div className="w-full nm-raised border border-[var(--border-subtle)] rounded-3xl p-12 text-center text-[var(--text-muted)] flex items-center justify-center">
+            <Loader2 className="w-6 h-6 animate-spin text-cyan-400" />
           </div>
         }
       >
